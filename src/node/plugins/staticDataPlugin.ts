@@ -5,8 +5,10 @@ import {
   normalizePath
 } from 'vite'
 import path, { dirname, resolve } from 'path'
-import { isMatch } from 'micromatch'
+import micromatch from 'micromatch'
 import glob from 'fast-glob'
+
+const isMatch = micromatch
 
 const loaderMatch = /\.data\.(j|t)s($|\?)/
 

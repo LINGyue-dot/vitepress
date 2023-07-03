@@ -9,10 +9,12 @@ import {
 } from '@clack/prompts'
 import fs from 'fs-extra'
 import path from 'path'
-import { black, cyan, bgCyan, bold, yellow } from 'picocolors'
+import picocolors from 'picocolors'
 import { fileURLToPath } from 'url'
 // @ts-ignore
 import template from 'lodash.template'
+
+const { black, cyan, bgCyan, bold, yellow } = picocolors
 
 export enum ScaffoldThemeType {
   Default = 'default theme',
