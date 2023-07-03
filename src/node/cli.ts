@@ -45,6 +45,7 @@ if (!command || command === 'dev') {
 } else {
   logVersion()
   if (command === 'build') {
+    // root == 文件夹路径
     build(root, argv).catch((err) => {
       createLogger().error(`${c.red(`build error:`)}\n${err.stack}`)
       process.exit(1)

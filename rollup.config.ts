@@ -53,7 +53,7 @@ const esmBuild: RollupOptions = {
     entryFileNames: `[name].js`,
     chunkFileNames: 'serve-[hash].js',
     dir: r('dist/node'),
-    sourcemap: DEV
+    sourcemap: true
   },
   external,
   plugins,
@@ -68,7 +68,8 @@ const cjsBuild: RollupOptions = {
     format: 'cjs',
     dir: r('dist/node-cjs'),
     entryFileNames: `[name].cjs`,
-    chunkFileNames: 'serve-[hash].cjs'
+    chunkFileNames: 'serve-[hash].cjs',
+    sourcemap: true
   },
   external,
   plugins,
@@ -81,7 +82,8 @@ const nodeTypes: RollupOptions = {
   input: r('src/node/index.ts'),
   output: {
     format: 'esm',
-    file: 'dist/node/index.d.ts'
+    file: 'dist/node/index.d.ts',
+    sourcemap: true
   },
   external,
   plugins: [dts({ respectExternal: true })]
@@ -91,7 +93,8 @@ const clientTypes: RollupOptions = {
   input: r('dist/client-types/index.d.ts'),
   output: {
     format: 'esm',
-    file: 'dist/client/index.d.ts'
+    file: 'dist/client/index.d.ts',
+    sourcemap: true
   },
   external,
   plugins: [

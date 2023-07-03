@@ -6,6 +6,7 @@ import {
   createLogger,
   loadConfigFromFile,
   mergeConfig as mergeViteConfig,
+  // 抹平系统差距即统一将 \ 转化为 /
   normalizePath,
   type ConfigEnv
 } from 'vite'
@@ -57,6 +58,7 @@ export async function resolveConfig(
   mode = 'development'
 ): Promise<SiteConfig> {
   // normalize root into absolute path
+  // path.resolve 返回绝对路径
   root = normalizePath(path.resolve(root))
 
   const [userConfig, configPath, configDeps] = await resolveUserConfig(
@@ -139,6 +141,7 @@ export async function resolveUserConfig(
   mode: string
 ): Promise<[UserConfig, string | undefined, string[]]> {
   // load user config
+  // vitepress/ 目录下，找到为空
   const configPath = supportedConfigExtensions
     .flatMap((ext) => [
       resolve(root, `config/index.${ext}`),
