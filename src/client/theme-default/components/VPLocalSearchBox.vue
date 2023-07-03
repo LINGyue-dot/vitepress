@@ -230,6 +230,7 @@ debouncedWatch(
 async function fetchExcerpt(id: string) {
   const file = pathToFile(id.slice(0, id.indexOf('#')))
   try {
+    if (!file) throw new Error(`Cannot find file for id: ${id}`)
     return { id, mod: await import(/*@vite-ignore*/ file) }
   } catch (e) {
     console.error(e)
@@ -420,7 +421,7 @@ function formMarkRegex(terms: Set<string>) {
             <button
               class="back-button"
               :title="$t('modal.backButtonTitle')"
-              @click="selectedIndex > -1 && $emit('close')"
+              @click="$emit('close')"
             >
               <svg
                 width="18"
