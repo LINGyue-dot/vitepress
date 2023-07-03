@@ -14,11 +14,11 @@ export default defineConfig({
       { find: 'node', replacement: resolve(dir, '../../src/node') },
       {
         find: /^vitepress$/,
-        replacement: resolve(dir, '../../src/client/index.js')
+        replacement: resolve(dir, '../../src/client/index.ts')
       },
       {
         find: /^vitepress\/theme$/,
-        replacement: resolve(dir, '../../src/client/theme-default/index.js')
+        replacement: resolve(dir, '../../src/client/theme-default/index.ts')
       }
     ]
   },

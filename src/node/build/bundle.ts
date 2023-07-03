@@ -86,7 +86,7 @@ export async function bundle(
         input: {
           ...input,
           // use different entry based on ssr or not
-          app: path.resolve(APP_PATH, ssr ? 'ssr.js' : 'index.js')
+          app: path.resolve(APP_PATH, ssr ? 'ssr.ts' : 'index.ts')
         },
         // important so that each page chunk and the index export things for each
         // other
