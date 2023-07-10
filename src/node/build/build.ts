@@ -2,7 +2,7 @@ import fs from 'fs-extra'
 import { createRequire } from 'module'
 import ora from 'ora'
 import path from 'path'
-import { packageDirectorySync } from 'pkg-dir'
+import { packageDirectorySync } from 'pkg-dir' // 找到最近的 package.json 的路径
 import { rimraf } from 'rimraf'
 import type { OutputAsset, OutputChunk } from 'rollup'
 import { pathToFileURL } from 'url'
@@ -18,7 +18,7 @@ export async function build(
   buildOptions: BuildOptions & { base?: string; mpa?: string } = {}
 ) {
   const start = Date.now()
-
+  // 处理 config
   process.env.NODE_ENV = 'production'
   const siteConfig = await resolveConfig(root, 'build', 'production')
   const unlinkVue = linkVue()
@@ -38,7 +38,7 @@ export async function build(
       siteConfig,
       buildOptions
     )
-
+      // TODO temp 目录是谁写入的？ vite 吗？
     const entryPath = path.join(siteConfig.tempDir, 'app.js')
     const { render } = await import(pathToFileURL(entryPath).toString())
 
@@ -153,6 +153,7 @@ export async function build(
   )
 }
 
+// 确保 Vue 在 node_module 存在
 function linkVue() {
   const root = packageDirectorySync()
   if (root) {

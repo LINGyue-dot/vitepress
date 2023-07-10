@@ -19,7 +19,7 @@ interface IndexObject {
   title: string
   titles: string[]
 }
-
+// TODO search 如何实现？
 export async function localSearchPlugin(
   siteConfig: SiteConfig
 ): Promise<Plugin> {

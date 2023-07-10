@@ -72,7 +72,7 @@ export async function resolveConfig(
     createLogger(userConfig.vite?.logLevel, {
       prefix: '[vitepress]',
       allowClearScreen: userConfig.vite?.clearScreen
-    })
+    }) // 基本信息准备，用户 config 路径等信息
   const site = await resolveSiteData(root, userConfig)
   const srcDir = normalizePath(path.resolve(root, userConfig.srcDir || '.'))
   const outDir = userConfig.outDir
@@ -136,13 +136,16 @@ export async function resolveConfig(
 
 const supportedConfigExtensions = ['js', 'ts', 'cjs', 'mjs', 'cts', 'mts']
 
+/**
+ * 查找 .vitepress 下的 config 文件
+ */
 export async function resolveUserConfig(
   root: string,
   command: 'serve' | 'build',
   mode: string
 ): Promise<[UserConfig, string | undefined, string[]]> {
   // load user config
-  // vitepress/ 目录下，找到为空
+  // vitepress/ 目录下
   const configPath = supportedConfigExtensions
     .flatMap((ext) => [
       resolve(root, `config/index.${ext}`),
@@ -212,6 +215,9 @@ function isObject(value: unknown): value is Record<string, any> {
   return Object.prototype.toString.call(value) === '[object Object]'
 }
 
+/**
+ * 合并用户 vitepress 数据
+ */
 export async function resolveSiteData(
   root: string,
   userConfig?: UserConfig,
@@ -236,6 +242,9 @@ export async function resolveSiteData(
   }
 }
 
+/**
+ * 给网页头添加 dark 模式脚本
+ */
 function resolveSiteDataHead(userConfig?: UserConfig): HeadConfig[] {
   const head = userConfig?.head ?? []
 

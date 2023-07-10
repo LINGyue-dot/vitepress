@@ -57,7 +57,7 @@ const isPageChunk = (
 
 const cleanUrl = (url: string): string =>
   url.replace(/#.*$/s, '').replace(/\?.*$/s, '')
-
+// 加载自定义插件
 export async function createVitePressPlugin(
   siteConfig: SiteConfig,
   ssr = false,
@@ -83,7 +83,7 @@ export async function createVitePressPlugin(
   // lazy require plugin-vue to respect NODE_ENV in @vue/compiler-x
   const vuePlugin = await import('@vitejs/plugin-vue').then((r) =>
     r.default({
-      include: [/\.vue$/, /\.md$/],
+      include: [/\.vue$/, /\.md$/], // TODO 为什么对 md 进行这个插件解析？
       ...userVuePluginOptions
     })
   )

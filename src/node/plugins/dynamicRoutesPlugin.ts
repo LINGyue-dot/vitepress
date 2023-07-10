@@ -34,7 +34,7 @@ export async function resolvePages(srcDir: string, userConfig: UserConfig) {
     dynamicRouteRE.lastIndex = 0
     ;(dynamicRouteRE.test(file) ? dynamicRouteFiles : pages).push(file)
   })
-
+  // TODO 动态路由页面，猜测是枚举出来所有可能页面路由并塞进去
   const dynamicRoutes = await resolveDynamicRoutes(srcDir, dynamicRouteFiles)
   pages.push(...dynamicRoutes.routes.map((r) => r.path))
 

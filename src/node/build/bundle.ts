@@ -1,4 +1,4 @@
-import ora from 'ora'
+import ora from 'ora' // 进度条 spinner
 import path from 'path'
 import fs from 'fs-extra'
 import {
@@ -28,8 +28,8 @@ const clientDir = normalizePath(
 
 // bundles the VitePress app for both client AND server.
 export async function bundle(
-  config: SiteConfig,
-  options: BuildOptions
+  config: SiteConfig, // vitepress 根据 config 生成的 config 对象
+  options: BuildOptions // process.argv
 ): Promise<{
   clientResult: RollupOutput
   serverResult: RollupOutput
@@ -148,6 +148,7 @@ export async function bundle(
   const spinner = ora()
   spinner.start('building client + server bundles...')
   try {
+    const temp = await resolveViteConfig(false)
     ;[clientResult, serverResult] = await (Promise.all([
       config.mpa ? null : build(await resolveViteConfig(false)),
       build(await resolveViteConfig(true))
